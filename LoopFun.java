@@ -25,7 +25,7 @@ public class LoopFun
        * @return Upper case string of the first letter of each word
        */
       public String acronym(String phrase) {
-        StringBuilder acronymFeed = new StringBuilder("");
+        /*StringBuilder acronymFeed = new StringBuilder("");
         String wordHolder = "";
         int spaceIndex;
         char firstLetter;
@@ -42,9 +42,19 @@ public class LoopFun
         
           String acronymResult = acronymFeed.toString().toUpperCase();
         return acronymResult;
-          
-      }
-
+        */
+       
+        char[] letters = phrase.toCharArray();
+        String firstLetters = "";
+        firstLetters += String.valueOf(letters[0]);
+        for (int i = 1; i < phrase.length();i++){
+            if (letters[i-1] == ' '){
+                firstLetters += String.valueOf(letters[i]);
+            }
+        }
+        firstLetters = firstLetters.toUpperCase();
+      return firstLetters;
+    }
       /**
        * To prevent anyone from reading our messages, we can encrypt it so it will only be readable by its
        * intended audience. This method encrypt the message by shifting the letter by 3 characters. If the character is
@@ -58,17 +68,16 @@ public class LoopFun
        * @return the encrypted string by shifting each character by three character
        */
       public String encrypt(String word) {
-          StringBuilder answer = new StringBuilder();
-          
-          for (int i = 0;i<word.length();i++){
-              String checkChar = String.valueOf(word.charAt(i));
-              if (checkChar.equals("x") || checkChar.equals('y') || checkChar.equals('z')){
-                  answer.append((word.charAt(i)-23));
+        char[] encrypted = word.toCharArray();
+        for (int i = 0; i < encrypted.length; i++){
+                if (encrypted[i] == 'x' || encrypted[i] == 'y' || encrypted[i] == 'z'){
+                encrypted[i] -= 23;
                 } else {
-                    answer.append((word.indexOf(i)+3));
-                }
-            }
-            String result = answer.toString();
-            return result;
+                    encrypted[i] += 3;
+        }
+    
+    }
+        String encryptedResult = new String(encrypted);
+        return encryptedResult;
         }
     }
