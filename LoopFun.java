@@ -29,16 +29,18 @@ public class LoopFun
         String wordHolder = "";
         int spaceIndex;
         char firstLetter;
-        for (int i = 0;i < phrase.length(); i++){
+        do{
             spaceIndex = phrase.indexOf(" ");
-            wordHolder = phrase.substring(0,spaceIndex
-        }
+            wordHolder = phrase.substring(0,spaceIndex);
+            acronymFeed.append(wordHolder.charAt(0));
+            phrase = phrase.replaceFirst(wordHolder, "");
+        } while (spaceIndex != -1 && wordHolder != "" && phrase != "");
         
         
         
             
         
-          String acronymResult = acronymFeed.tostring().toUpperCase();
+          String acronymResult = acronymFeed.toString().toUpperCase();
         return acronymResult;
           
       }
@@ -56,8 +58,17 @@ public class LoopFun
        * @return the encrypted string by shifting each character by three character
        */
       public String encrypt(String word) {
+          StringBuilder answer = new StringBuilder();
           
-            
-          return null;
-      }
-}
+          for (int i = 0;i<word.length();i++){
+              String checkChar = String.valueOf(word.charAt(i));
+              if (checkChar.equals("x") || checkChar.equals('y') || checkChar.equals('z')){
+                  answer.append((word.charAt(i)-23));
+                } else {
+                    answer.append((word.indexOf(i)+3));
+                }
+            }
+            String result = answer.toString();
+            return result;
+        }
+    }
